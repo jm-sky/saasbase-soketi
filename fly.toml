@@ -1,0 +1,13 @@
+app = "saasbase-soketi"  # Replace with your Fly.io app name
+
+primary_region = "fra"  # Choose a region close to your user base, e.g., 'fra' for Frankfurt
+
+[build]
+  dockerfile = "Dockerfile"
+
+[[services]]
+  internal_port = 6001  # Port for Soketi
+  protocol = "tcp"
+  [services.ports]
+    http = 80
+    https = 443
