@@ -1,13 +1,15 @@
-app = "saasbase-soketi"  # Replace with your Fly.io app name
+app = "saasbase-soketi"
 
-primary_region = "fra"  # Choose a region close to your user base, e.g., 'fra' for Frankfurt
+primary_region = "fra"
 
 [build]
-  dockerfile = "Dockerfile"
+image = "quay.io/soketi/soketi:1.5-16-alpine"
 
 [[services]]
-  internal_port = 6001  # Port for Soketi
+  internal_port = 6001
   protocol = "tcp"
-  [services.ports]
-    http = 80
-    https = 443
+
+  [[services.ports]]
+    port = 80
+  [[services.ports]]
+    port = 443
