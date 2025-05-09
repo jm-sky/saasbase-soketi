@@ -1,1 +1,3 @@
-FROM quay.io/soketi/soketi:1.5-16-alpine 
+FROM quay.io/soketi/soketi:1.5-16-alpine
+
+CMD ["soketi", "start"]
