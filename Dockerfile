@@ -1,18 +1,13 @@
 FROM node:18-slim
 
-# Install dependencies for Soketi
-RUN apt-get update && apt-get install -y \
-  curl \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
+# Instalacja minimalnych zależności systemowych
+RUN apt-get update && apt-get install -y dumb-init && rm -rf /var/lib/apt/lists/*
 
-# Install Soketi
-RUN curl -fsSL https://github.com/soketi/soketi/releases/download/v1.5.0/soketi-v1.5.0-linux-x64.tar.gz -o soketi.tar.gz \
-  && tar -xvzf soketi.tar.gz -C /usr/local/bin/ \
-  && rm soketi.tar.gz
+# Globalna instalacja soketi
+RUN npm install -g soketi
 
-# Expose port for WebSocket communication
+# Ustaw port domyślny
 EXPOSE 6001
 
-# Run Soketi
-CMD ["soketi", "start"]
+# Domyślne uruchomienie
+CMD ["dumb-init", "soketi", "start"]
