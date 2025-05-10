@@ -5,11 +5,18 @@ primary_region = "fra"
 [build]
 image = "quay.io/soketi/soketi:1.5-16-alpine"
 
+[env]
+SOCKET_HOST = "0.0.0.0"
+SOCKET_PORT = "6001"
+
 [[services]]
   internal_port = 6001
   protocol = "tcp"
 
   [[services.ports]]
     port = 80
+    handlers = ["http"]
+
   [[services.ports]]
     port = 443
+    handlers = ["tls", "http"]
